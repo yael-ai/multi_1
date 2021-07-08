@@ -13,29 +13,38 @@ Original file is located at
 
 # Commented out IPython magic to ensure Python compatibility.
 # Environment
-#!pip install git+https://github.com/eleurent/highway-env#egg=highway-env
+# !pip install git+https://github.com/eleurent/highway-env#egg=highway-env
 import gym
 import highway_env
-
+#from highway_env_lo import HighwayEnv
 # Agent
-#!pip install git+https://github.com/eleurent/rl-agents#egg=rl-agentsA
+# !pip install git+https://github.com/eleurent/rl-agents#egg=rl-agentsA
 
 # Visualisation utils
 import sys
+import gym
+
+#from highway_env_local.envs import highway_env_local
+#env = gym.make("highway_local-v0")
+
+
 # %load_ext tensorboard
-#!pip install tensorboardx gym pyvirtualdisplay
-#!apt-get install -y xvfb python-opengl ffmpeg
-#!git clone https://github.com/eleurent/highway-env.git
+# !pip install tensorboardx gym pyvirtualdisplay
+# !apt-get install -y xvfb python-opengl ffmpeg
+# !git clone https://github.com/eleurent/highway-env.git
 
-#sys.path.insert(0,'/data/home/yael123/HIGHWAY_ALL/highway-env/scripts/')
-#rl_agents_dir = '/data/home/yael123/HIGHWAY_ALL/rl-agents/'
+# sys.path.insert(0,'/data/home/yael123/HIGHWAY_ALL/highway-env/scripts/')
+# rl_agents_dir = '/data/home/yael123/HIGHWAY_ALL/rl-agents/'
 
 
-sys.path.insert(0,'C:/Users/yael/Documents/GitHub/multi/highway-env/scripts/')
+sys.path.insert(0, '/highway-env/scripts/')
+#sys.path.insert(0,'C:/Users/yael/Documents/GitHub/multi/highway-env/scripts/')
+#rl_agents_dir = '/rl-agents/'
 rl_agents_dir = 'C:/Users/yael/Documents/GitHub/multi/rl-agents/'
+#rl_agents_dir = abspAath('rl-agents')
 sys.path.append(rl_agents_dir)
 
-#from utils import show_videos
+# from utils import show_videos
 
 
 """## Training
@@ -51,25 +60,28 @@ from rl_agents.trainer.evaluation import Evaluation
 from rl_agents.agents.common.factory import load_agent, load_environment
 
 # Get the environment and agent configurations from the rl-agents repository
-#!git clone https://github.com/eleurent/rl-agents.git
+# !git clone https://github.com/eleurent/rl-agents.git
 # %cd /content/rl-agents/scripts/
 
 import os
+
 os.chdir(rl_agents_dir + "/scripts/")
+
+#env_config = HighwayEnv()
 env_config = 'configs/HighwayEnv/env.json'
 agent_config = 'configs/HighwayEnv/agents/DQNAgent/ddqn.json'
 
 env = load_environment(env_config)
-#env.config["lanes_count"] = 4
-#env.config["vehicles_count"]=30
-#env.config["vehicles_density"] = 2
-#env.reset()
+# env.config["lanes_count"] = 4
+# env.config["vehicles_count"]=30
+# env.config["vehicles_density"] = 2
+# env.reset()
 
 agent = load_agent(agent_config, env)
 evaluation = Evaluation(env, agent, num_episodes=3000, display_env=False)
 print("21/04/2021")
 print("NO TRAIN")
-#print(f"Ready to train {agent} on {env}")
+# print(f"Ready to train {agent} on {env}")
 
 """Run tensorboard locally to visualize training."""
 
@@ -89,9 +101,9 @@ Run the learned policy for a few episodes.
 
 env = load_environment(env_config)
 env.configure({"offscreen_rendering": True})
-#env.config["lanes_count"] = 4
-#env.config["vehicles_count"]=30
-#env.config["vehicles_density"] = 2
+# env.config["lanes_count"] = 4
+# env.config["vehicles_count"]=30
+# env.config["vehicles_density"] = 2
 env.reset()
 agent = load_agent(agent_config, env)
 evaluation = Evaluation(env, agent, num_episodes=3000, recover=True)
